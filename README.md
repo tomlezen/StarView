@@ -28,6 +28,8 @@ implementation 'com.github.tomlezen:StarView:1.0.0'
 <!-- 星星线条宽度. -->
 <attr name="star_stroke_width" format="color" />
 
+// 设置当前星数
+StarView.starNum = xxx
 // 选择回调.
 StarView.onStarSelected = {
 }
