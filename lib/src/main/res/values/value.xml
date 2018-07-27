@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">lib</string>
+
+    <dimen name="def_star_padding">2dp</dimen>
+    <dimen name="def_star_size">30dp</dimen>
+    <dimen name="def_star_space">10dp</dimen>
+    <dimen name="def_star_stroke_width">1.5dp</dimen>
+
+    <color name="def_star_color">#939191</color>
+    <color name="def_star_select_color">#f52c2c</color>
+
+    <integer name="def_star_total_num">5</integer>
+
+    <declare-styleable name="StarView">
+        <!-- 是否可以选择. -->
+        <attr name="star_selectable" format="boolean" />
+        <!-- 星星总数. -->
+        <attr name="star_total_num" format="integer" />
+        <!-- 当前星星数. -->
+        <attr name="star_num" format="float" />
+        <!-- 星星大小. -->
+        <attr name="star_size" format="dimension" />
+        <!-- 星星半径比例. -->
+        <attr name="star_radius_scale" format="float" />
+        <!-- 星星之间间隔. -->
+        <attr name="star_space" format="dimension" />
+        <!-- 星星选中颜色. -->
+        <attr name="star_select_color" format="color" />
+        <!-- 星星颜色. -->
+        <attr name="star_color" format="color" />
+        <!-- 星星线条宽度. -->
+        <attr name="star_stroke_width" format="color" />
+    </declare-styleable>
+
+</resources>
