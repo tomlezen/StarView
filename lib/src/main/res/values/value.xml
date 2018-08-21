@@ -29,7 +29,7 @@
         <!-- 星星颜色. -->
         <attr name="star_color" format="color" />
         <!-- 星星线条宽度. -->
-        <attr name="star_stroke_width" format="color" />
+        <attr name="star_stroke_width" format="dimension" />
     </declare-styleable>
 
 </resources>

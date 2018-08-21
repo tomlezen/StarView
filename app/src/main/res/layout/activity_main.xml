@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         app:star_selectable="false"
         app:star_size="50dp"
-        app:star_num="2.3"/>
+        app:star_num="4.5"/>
 
     <TextView
         android:layout_width="match_parent"

@@ -5,6 +5,7 @@ import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
+import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
@@ -115,7 +116,6 @@ class StarView(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
     private var isInitFinish = false
 
     init {
-
         val ta = ctx.obtainStyledAttributes(attrs, R.styleable.StarView)
 
         selectable = ta.getBoolean(R.styleable.StarView_star_selectable, false)
@@ -158,7 +158,8 @@ class StarView(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
         if (changed) {
             // 计算第一个星星绘制区域
             val startX = (width / 2 - (starSize * starTotalNum + starSpace * (starTotalNum - 1)) / 2f)
-            starRectF.set(startX, height / 2f - starSize / 2, startX + starSize, height / 2f + starSize / 2)
+            val rectFTop = height / 2f - paddingBottom / 2 - starSize / 2 + paddingTop / 2 + starStrokeWidth
+            starRectF.set(startX, rectFTop, startX + starSize - starStrokeWidth * 2, rectFTop + starSize - starStrokeWidth * 2)
 
             computeStarPoints()
         }
@@ -186,6 +187,7 @@ class StarView(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
                     }
                     starPath.close()
                     val d = starNum - index.toFloat() - 1f
+                    paint.strokeWidth = starStrokeWidth.toFloat()
                     when {
                         d >= 0f -> {
                             cvs.save()
@@ -212,7 +214,6 @@ class StarView(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
                                 }
                             }
                             paint.style = Paint.Style.STROKE
-                            paint.strokeWidth = starStrokeWidth.toFloat()
                             cvs.drawPath(starPath, paint)
                             cvs.restore()
                         }
@@ -220,7 +221,6 @@ class StarView(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
                             cvs.save()
                             paint.color = starSelectColor
                             paint.style = Paint.Style.STROKE
-                            paint.strokeWidth = starStrokeWidth.toFloat()
                             clipRectF.set(starRectF)
                             clipRectF.offset(tDist, 0f)
                             clipRectF.left = clipRectF.right - clipRectF.width() * (1f + starNum.toInt() - starNum)
@@ -277,10 +277,11 @@ class StarView(ctx: Context, attrs: AttributeSet) : View(ctx, attrs) {
      * @param y Float
      */
     private fun computeClickPosition(x: Float, y: Float) {
-        val dist = starRectF.width() + starSpace
+        val dist = starRectF.width() + starSpace + starStrokeWidth * 2
         run Break@{
             (0 until 5).forEach {
                 clipRectF.set(starRectF)
+                clipRectF.inset(-starStrokeWidth.toFloat(), -starStrokeWidth.toFloat())
                 clipRectF.offset(dist * it, 0f)
                 if (clipRectF.contains(x, y)) {
                     clickPosition = it
